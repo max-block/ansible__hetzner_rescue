@@ -1,0 +1,9 @@
+servers:
+  vars:
+    ssh_keys:
+      - /.ssh/id_rsa.pub
+  hosts:
+    server-1:
+      ansible_host: 123.123.123.123
+      ansible_password: secret
+      hostname: my-host
