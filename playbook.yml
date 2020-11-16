@@ -1,0 +1,16 @@
+- hosts: servers
+  tasks:
+    - name: Set /root/.ssh/authorized_keys
+      authorized_key:
+        user: root
+        state: present
+        key: "{{ lookup('file', '{{ item }}') }}"
+      with_items: "{{ ssh_keys }}"
+
+    - name: Copy /installimage.conf
+      template: src=installimage.conf dest=/installimage.conf
+
+    - name: Run installimage
+      command: installimage -ac /installimage.conf
+
+    - reboot:
